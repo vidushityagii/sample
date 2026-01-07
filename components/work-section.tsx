@@ -5,6 +5,28 @@ import { ChapterCard } from "./chapter-card";
 const chapters = [
     {
         number: "01",
+        title: "Ads That Sell",
+        subtitle: "Commercial / Ad Films",
+        projects: [
+            {
+                title: "Sneaker Hype",
+                category: "Commercial",
+                videoSrc: "https://drive.google.com/file/d/14f-7ElxGKmJ7WAW2g4VLSiyBl_2xLigL/view?usp=drive_link",
+                description: "Fast-paced edit for a streetwear brand launch. Increased CTR by 45%.",
+                tools: ["Premiere Pro", "DaVinci Resolve"]
+            },
+            {
+                title: "Tech Minimalism",
+                category: "Product Reveal",
+                videoSrc: "https://drive.google.com/file/d/1ZUQ_z1WXtyUkwhyCZD_-3mAy5WLw1LyJ/view?usp=drive_link",
+                description: "Clean, rhythm-based edit focusing on product sound design and macro shots.",
+                tools: ["Premiere Pro", "After Effects"]
+            },
+
+        ]
+    },
+    {
+        number: "02",
         title: "Scroll-Stopping Content",
         subtitle: "Social Media / Reels",
         projects: [
@@ -50,28 +72,6 @@ const chapters = [
                 description: "Engaging storytelling format for a creator's daily vlog.",
                 tools: ["Premiere Pro"]
             }
-        ]
-    },
-    {
-        number: "02",
-        title: "Ads That Sell",
-        subtitle: "Commercial / Ad Films",
-        projects: [
-            {
-                title: "Sneaker Hype",
-                category: "Commercial",
-                videoSrc: "https://drive.google.com/file/d/14f-7ElxGKmJ7WAW2g4VLSiyBl_2xLigL/view?usp=drive_link",
-                description: "Fast-paced edit for a streetwear brand launch. Increased CTR by 45%.",
-                tools: ["Premiere Pro", "DaVinci Resolve"]
-            },
-            {
-                title: "Tech Minimalism",
-                category: "Product Reveal",
-                videoSrc: "https://drive.google.com/file/d/1ZUQ_z1WXtyUkwhyCZD_-3mAy5WLw1LyJ/view?usp=drive_link",
-                description: "Clean, rhythm-based edit focusing on product sound design and macro shots.",
-                tools: ["Premiere Pro", "After Effects"]
-            },
-
         ]
     },
     {
