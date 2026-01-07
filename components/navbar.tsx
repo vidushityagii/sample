@@ -1,178 +1,24 @@
 "use client"
 
 import Link from "next/link"
-import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
 import { motion } from "framer-motion"
 
 export function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState("home")
-  const [scrolled, setScrolled] = useState(false)
-
-  const sections = [
-    "home",
-    "about",
-    "services",
-    "showreel",
-    "experience",
-    "projects",
-    "skills",
-    "testimonials",
-    "contact",
-  ]
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Set navbar background when scrolled
-      if (window.scrollY > 50) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
-      }
-
-      // Determine active section
-      const currentPosition = window.scrollY + 300
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = document.getElementById(sections[i])
-        if (section && section.offsetTop <= currentPosition) {
-          setActiveSection(sections[i])
-          break
-        }
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [sections])
-
-  const navVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0 },
-  }
-
   return (
     <motion.nav
-      initial="hidden"
-      animate="visible"
-      variants={navVariants}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-[#121620]/90 backdrop-blur-md border-b border-[#00e5ff]/10 py-3" : "bg-transparent py-5"
-      }`}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="fixed top-0 left-0 right-0 z-50 py-6 px-8 flex justify-between items-center mix-blend-difference"
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <motion.div variants={itemVariants} className="relative">
-          <Link href="/" className="text-[#00e5ff] text-2xl font-bold flex items-center">
-            <span className="mr-2">VIDUSHI</span>
-            <span className="relative">
-              <span className="absolute -inset-1 rounded-lg bg-[#00e5ff] blur-sm opacity-50"></span>
-              <span className="relative text-black bg-[#00e5ff] px-2 py-1 rounded-lg">TYAGI</span>
-            </span>
-          </Link>
-        </motion.div>
+      <Link href="/" className="text-xl font-bold tracking-tighter text-white">
+        VIDUSHI TYAGI
+      </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-1">
-          {[
-            { name: "Home", id: "home" },
-            { name: "About", id: "about" },
-            { name: "Services", id: "services" },
-            { name: "Showreel", id: "showreel" },
-            { name: "Experience", id: "experience" },
-            { name: "Projects", id: "projects" },
-            { name: "Skills", id: "skills" },
-            { name: "Testimonials", id: "testimonials" },
-            { name: "Contact", id: "contact" },
-          ].map((item) => (
-            <motion.div key={item.id} variants={itemVariants}>
-              <Link
-                href={`#${item.id}`}
-                className={`px-3 py-2 rounded-md transition-all duration-300 ${
-                  activeSection === item.id
-                    ? "text-[#00e5ff] bg-[#00e5ff]/10 font-medium"
-                    : "text-gray-300 hover:text-[#00e5ff] hover:bg-[#00e5ff]/5"
-                }`}
-              >
-                {item.name}
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="activeSection"
-                    className="h-0.5 bg-[#00e5ff] mt-1"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  />
-                )}
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Mobile Navigation Toggle */}
-        <motion.button
-          variants={itemVariants}
-          className="md:hidden text-gray-300 z-50"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </motion.button>
-
-        {/* Mobile Navigation Menu */}
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 100 }}
-            transition={{ duration: 0.3 }}
-            className="fixed top-0 right-0 bottom-0 w-3/4 bg-[#0a0e14] border-l border-[#00e5ff]/10 md:hidden flex flex-col p-4 pt-20"
-          >
-            <div className="flex flex-col space-y-2">
-              {[
-                { name: "Home", id: "home" },
-                { name: "About", id: "about" },
-                { name: "Services", id: "services" },
-                { name: "Showreel", id: "showreel" },
-                { name: "Experience", id: "experience" },
-                { name: "Projects", id: "projects" },
-                { name: "Skills", id: "skills" },
-                { name: "Testimonials", id: "testimonials" },
-                { name: "Contact", id: "contact" },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.id}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link
-                    href={`#${item.id}`}
-                    className={`block px-4 py-3 rounded-md ${
-                      activeSection === item.id
-                        ? "text-[#00e5ff] bg-[#00e5ff]/10 font-medium"
-                        : "text-gray-300 hover:text-[#00e5ff]"
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
+      <div className="flex gap-6">
+        <Link href="mailto:contact@vidushi.com" className="text-sm font-medium text-white hover:opacity-70 transition-opacity">
+          CONTACT
+        </Link>
       </div>
     </motion.nav>
   )
